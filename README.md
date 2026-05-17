@@ -89,9 +89,7 @@ globaltna-assessment/
 ### Backend — `backend/.env`
 
 ```env
-PORT=5000
-MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/test?appName=<appName>
-JWT_SECRET=your_super_secret_jwt_key_here
+hide
 ```
 
 ### Frontend — `frontend/.env.local`
