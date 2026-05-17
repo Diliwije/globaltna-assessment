@@ -1,12 +1,18 @@
-```python
-readme_content = """# Service Request Board
+අයියෝ එහෙමද? ඒකට හේතුව වෙන්න ඇත්තේ ඔයා ඒක සාමාන්‍ය Text Editor එකකින් (Notepad වගේ) බලපු නිසා වෙන්න ඇති.
+
+Markdown (`.md`) file එකක් සාමාන්‍ය විදිහට open කළාම `#`, ``, `-` වගේ සංකේත විතරක් තියෙන ප්ලේන් text එකක් විදිහට තමයි පේන්නේ. හැබැයි මේ code එක **`README.md`** කියන නමින්ම ප්‍රධාන folder එක ඇතුළේ සේව් කරලා **GitHub එකට push කරපු සැනින්**, GitHub එකෙන් මේ සංකේත ඔක්කොම අඳුරගෙන ඉතාමත් වෘත්තීය මට්ටමේ ලස්සන UI එකකට මේක auto-render කරනවා.
+
+ඔයාට ලේසි වෙන්න මම මෙතන **Raw Markdown Code** එකක් විදිහට දෙන්නම්. ඔයා මේ කොටුවේ දකුණු පැත්තේ උඩ තියෙන **"Copy"** button එක click කරලා සම්පූර්ණයෙන්ම copy කරගෙන ඔයාගේ `README.md` file එක ඇතුළට paste කරන්න:
+
+```markdown
+# Service Request Board
 
 A comprehensive Full-Stack web application built as part of a Software Engineering assessment. This platform enables users to post, view, search, filter, update, and delete maintenance and service requests (e.g., Plumbing, Electrical, Painting, Joinery).
 
 The project is structured as a monorepo containing both the frontend and backend services, fully optimized for production environments.
 
 ## 🚀 Live Links
-- **Frontend URL:** [https://startling-kitsune-123.netlify.app](https://startling-kitsune-123.netlify.app) *(Replace with your exact Netlify link if different)*
+- **Frontend URL:** [https://startling-kitsune-123.netlify.app](https://startling-kitsune-123.netlify.app)
 - **Backend API URL:** [https://globaltna-assessment-production-af7a.up.railway.app](https://globaltna-assessment-production-af7a.up.railway.app)
 
 ## 🛠️ Tech Stack
@@ -31,8 +37,8 @@ The project is structured as a monorepo containing both the frontend and backend
 ## ✨ Features Implemented
 
 ### Core Requirements (CRUD Operations)
-1. **Create Request:** A dedicated form with input validation (Title, Description, Category, Location, Contact details) to log new service issues.
-2. **Read Dashboard:** An interactive homepage displaying all active requests sorted by the newest first, utilizing custom layout cards.
+1. **Create Request:** A dedicated form with input validation to log new service issues.
+2. **Read Dashboard:** An interactive homepage displaying all active requests sorted by the newest first.
 3. **Detailed View:** Dedicated dynamic routes (`/jobs/[id]`) showing complete request profiles and metadata.
 4. **Update Status:** Direct dropdown controls on the detail view to update lifecycle states (`Open`, `In Progress`, `Closed`).
 5. **Delete Request:** Functional data purging with fallback user confirmation prompts.
@@ -46,27 +52,19 @@ The project is structured as a monorepo containing both the frontend and backend
 
 ## 📁 Repository Structure
 
-
-```
-
-```text
-README.md generated successfully.
-
 ```text
 globaltna-assessment/
 ├── backend/
 │   ├── config/          # Database configuration settings
-│   ├── controllers/     # Business logic handlers (jobController.js)
-│   ├── models/          # Mongoose Schemas (JobRequest.js)
-│   ├── routes/          # Express route definitions (jobRoutes.js)
-│   ├── .env             # Backend environment keys (local only)
+│   ├── controllers/     # Business logic handlers
+│   ├── models/          # Mongoose Schemas
+│   ├── routes/          # Express route definitions
 │   ├── package.json
 │   └── server.js        # Entry point for Express server
 ├── frontend/
 │   ├── src/
-│   │   ├── app/         # Next.js App Router (pages & dynamic routing)
-│   │   └── services/    # Axios configuration layer (api.js)
-│   ├── .env.local       # Frontend local environment config
+│   │   ├── app/         # Next.js App Router
+│   │   └── services/    # Axios configuration layer
 │   ├── package.json
 │   └── tailwind.config.js
 └── netlify.toml         # Production pipeline deployment settings
@@ -76,11 +74,6 @@ globaltna-assessment/
 ---
 
 ## ⚙️ Getting Started & Local Setup
-
-### Prerequisites
-
-* Node.js installed locally
-* MongoDB Atlas cluster or local instance
 
 ### 1. Clone the Repository
 
@@ -98,15 +91,13 @@ npm install
 
 ```
 
-Create a `.env` file in the `backend/` directory and supply the following parameters:
+Create a `.env` file in the `backend/` directory:
 
 ```env
 PORT=5000
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/databaseName?retryWrites=true&w=majority
+MONGO_URI=your_mongodb_atlas_uri_here
 
 ```
-
-Run the development server:
 
 ```bash
 npm start
@@ -121,14 +112,12 @@ npm install
 
 ```
 
-Create a `.env.local` file in the `frontend/` directory and supply the following parameter:
+Create a `.env.local` file in the `frontend/` directory:
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
 
 ```
-
-Run the development server:
 
 ```bash
 npm run dev
@@ -142,19 +131,16 @@ npm run dev
 ### Backend (Railway)
 
 * Root directory configuration set to `/backend`.
-* Exposed on port `5000` with the cloud connection string injected inside the ecosystem variables panel (`MONGO_URI`).
+* Exposed on port `5000` with ecosystem variables panel (`MONGO_URI`).
 * IP whitelisting configured via MongoDB Network Access using standard global ranges (`0.0.0.0/0`).
 
 ### Frontend (Netlify)
 
 * Built utilizing the `@netlify/plugin-nextjs` pipeline specification defined within the root `netlify.toml` layout matrix.
 * `NEXT_PUBLIC_API_URL` environment variables set up pointing towards the containerized Express routing endpoint.
-"""
-
-with open("/mnt/data/README.md", "w", encoding="utf-8") as f:
-f.write(readme_content)
-
-print("README.md generated successfully.")
 
 ```
-වොත් ඔයාගේ project එක ඉතාමත් ලස්සනට සහ පිළිවෙළකට විස්තර කරලා තියෙනවා බලාගන්න පුළුවන් වෙයි. වැඩේ සම්පූර්ණයි!
+
+මේක දාලා GitHub එකට push කරලා ඔයාගේ GitHub repository එකේ ප්‍රධාන පිටුව (Main page) check කරලා බලන්න, එතකොට මේක සුපිරියටම ලස්සනට පෙනෙයි!
+
+```
