@@ -1,11 +1,11 @@
-// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-// Import the job routes
+// Import routes
 const jobRoutes = require('./routes/jobRoutes');
+const authRoutes = require('./routes/authRoutes'); // Added authentication routes
 
 const app = express();
 
@@ -23,7 +23,8 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ message: 'API is running' });
 });
 
-// Mount the job routes
+// Mount routes
+app.use('/api/auth', authRoutes); // Added authentication endpoints
 app.use('/api/jobs', jobRoutes);
 
 // Catch-all route for unhandled endpoints (404 Error Handler)

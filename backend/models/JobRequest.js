@@ -1,4 +1,3 @@
-// models/JobRequest.js
 const mongoose = require('mongoose');
 
 const JobRequestSchema = new mongoose.Schema({
@@ -37,6 +36,12 @@ const JobRequestSchema = new mongoose.Schema({
     type: String,
     enum: ['Open', 'In Progress', 'Closed'],
     default: 'Open'
+  },
+  // Reference to link each job request to the authenticated user who created it
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'User reference is required']
   },
   createdAt: {
     type: Date,

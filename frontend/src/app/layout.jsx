@@ -1,10 +1,11 @@
-// src/app/layout.js
-import './globals.css'
+import { AuthProvider } from '@/context/AuthContext';
+import './globals.css';
 
+// Global application metadata configuration
 export const metadata = {
   title: 'GlobalTNA Service Board',
   description: 'Assessment project for GlobalTNA',
-}
+};
 
 export default function RootLayout({ children }) {
   return (
@@ -17,7 +18,12 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {/* Global context provider to handle user login and JWT state */}
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
-  )
+  );
 }

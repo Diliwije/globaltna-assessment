@@ -1,7 +1,6 @@
-// controllers/jobController.js
 const JobRequest = require('../models/JobRequest');
 
-// Fetch all job requests with optional filtering and searching
+// Fetch all job requests with optional filtering, searching, and user population
 exports.getJobs = async (req, res, next) => {
   try {
     const { category, status, search } = req.query;
@@ -19,18 +18,22 @@ exports.getJobs = async (req, res, next) => {
       ];
     }
 
-    // Fetch jobs and sort by newest first
-    const jobs = await JobRequest.find(filter).sort({ createdAt: -1 });
+    // Fetch jobs, sort by newest first, and populate the creator's name
+    const jobs = await JobRequest.find(filter)
+      .sort({ createdAt: -1 })
+      .populate('user', 'name'); // Dynamically fetches only the 'name' field of the referenced User
+      
     res.status(200).json(jobs);
   } catch (error) {
     next(error);
   }
 };
 
-// Fetch a single job request by its ID
+// Fetch a single job request by its ID with user population
 exports.getJobById = async (req, res, next) => {
   try {
-    const job = await JobRequest.findById(req.params.id);
+    // Fetch single job and populate the creator's name
+    const job = await JobRequest.findById(req.params.id).populate('user', 'name');
     if (!job) {
       return res.status(404).json({ error: 'Job request not found' });
     }
@@ -44,7 +47,7 @@ exports.getJobById = async (req, res, next) => {
   }
 };
 
-// Create a new job request
+// Create a new job request and bind it to the authenticated user
 exports.createJob = async (req, res, next) => {
   try {
     const { title, description } = req.body;
@@ -54,7 +57,13 @@ exports.createJob = async (req, res, next) => {
       return res.status(400).json({ error: 'Title and description are required' });
     }
 
-    const newJob = await JobRequest.create(req.body);
+    // Structure the job data and inject the logged-in user's ID from protect middleware
+    const jobData = {
+      ...req.body,
+      user: req.user.id // Injected automatically by authMiddleware protect function
+    };
+
+    const newJob = await JobRequest.create(jobData);
     res.status(201).json(newJob);
   } catch (error) {
     // Handle Mongoose validation errors
