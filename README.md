@@ -1,161 +1,172 @@
+# 🛠️ Service Request Board
 
+> A full-stack web application built for the **GlobalTNA Software Engineering Assessment** — enabling authenticated users to post, manage, search, filter, and track maintenance and service requests across categories like Plumbing, Electrical, Painting, and Joinery.
 
-```markdown
-# Service Request Board (with JWT Authentication)
+<div align="center">
 
-A professional Full-Stack Web Application built as part of the Software Engineering assessment for GlobalTNA. This platform allows authenticated users to seamlessly post, view, search, filter, update, and delete maintenance and service requests (e.g., Plumbing, Electrical, Painting, Joinery) through a modern, responsive, and highly optimized light-themed UI.
+![Next.js](https://img.shields.io/badge/Next.js-14+-black?style=for-the-badge&logo=nextdotjs)
+![Express](https://img.shields.io/badge/Express.js-4.x-green?style=for-the-badge&logo=express)
+![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb)
+![JWT](https://img.shields.io/badge/Auth-JWT-orange?style=for-the-badge&logo=jsonwebtokens)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-38BDF8?style=for-the-badge&logo=tailwindcss)
 
-The project is structured as a monorepo housing both the containerized backend and the client-side frontend application.
-
-## 🚀 Live Production Links
-- **Frontend Live URL:** [https://startling-kitsune-123.netlify.app](https://startling-kitsune-123.netlify.app)
-- **Backend API Live URL:** [https://globaltna-assessment-production-af7a.up.railway.app](https://globaltna-assessment-production-af7a.up.railway.app)
-
----
-
-## 🛠️ Tech Stack & Key Technologies
-
-### Frontend
-- **Framework:** Next.js 14+ (App Router Architecture)
-- **Styling:** Tailwind CSS (Modern Light-Theme Aesthetic)
-- **State & Session Management:** React Context API (`AuthProvider`)
-- **HTTP Client:** Axios (Configured with request interceptors for automated token attachment)
-
-### Backend
-- **Runtime Environment:** Node.js
-- **Framework:** Express.js
-- **Database ORM:** Mongoose
-- **Security & Encryption:** JSON Web Tokens (JWT) & bcryptjs (Password Hashing)
-
-### Database
-- **Provider:** MongoDB Atlas (Cloud Cluster configured for the `test` database environment)
+</div>
 
 ---
 
-## ✨ Features Implemented
+## 🌐 Live Demo
 
-### 1. Secure Authentication & Authorization (JWT)
-- **User Management:** Secure user registration and login pathways. Passwords are encrypted utilizing `bcryptjs` salts before database storage.
-- **Frontend Route Guards:** Intercepts unauthorized page requests. Users trying to access the Dashboard (`/`) or the creation form (`/new`) without authenticating are immediately redirected to the `/login` view.
-- **Protected Backend API Endpoints:** Custom middleware validation intercepts `POST`, `PATCH`, and `DELETE` execution pipelines to enforce valid `Bearer` tokens.
-
-### 2. Core Business Logic (CRUD Operations)
-- **Create Request:** Data validation forms that capture input schemas and automatically map the logged-in user's reference database ID (`user`) to the created entry.
-- **Read Dashboard:** An interactive homepage that lists active service requests dynamically sorted by the newest records first. Employs Mongoose `.populate()` to seamlessly render the creator's identity properties ("Posted by: [User Name]").
-- **Detailed Component Routing:** Dynamic sub-routing (`/jobs/[id]`) presenting comprehensive request parameters, metadata records, and custom user logs.
-- **Update Status:** Embedded control mechanisms enabling users to mutate record states safely (`Open`, `In Progress`, `Closed`).
-- **Data Purging:** Fully functional document deletion processes guarded with safety confirmation modals.
-
-### 3. Intermediate Enhancements
-- **Regex Query Engine:** Efficient server-side search patterns triggering case-insensitive lookups mapping across both Title and Description schemas.
-- **Multi-layered Filter Matrices:** Synchronized UI state toggles matching Category and Status queries concurrently.
+| Service | URL |
+|---|---|
+| 🖥️ **Frontend** | [https://startling-kitsune-123.netlify.app](https://startling-kitsune-123.netlify.app) |
+| ⚙️ **Backend API** | [https://globaltna-assessment-production-af7a.up.railway.app](https://globaltna-assessment-production-af7a.up.railway.app) |
 
 ---
 
-## 📁 Repository Structure
+## ✨ Features
 
-```text
+### 🔐 Authentication & Authorization (JWT)
+- Secure **user registration and login** with `bcryptjs` password hashing
+- **Frontend route guards** — unauthenticated users are redirected from `/` and `/new` to `/login`
+- **Protected API endpoints** — `POST`, `PATCH`, and `DELETE` routes require a valid `Bearer` token via custom middleware
+
+### 📋 CRUD Operations
+- **Create** — Form with validation; automatically links the request to the logged-in user's ID
+- **Read** — Dashboard listing all requests sorted newest-first, with creator name via Mongoose `.populate()`
+- **Detail View** — Dynamic routing at `/jobs/[id]` showing full request info, metadata, and logs
+- **Update** — Change request status between `Open`, `In Progress`, and `Closed`
+- **Delete** — Permanent deletion with a confirmation modal for safety
+
+### 🔍 Search & Filtering
+- **Server-side regex search** — Case-insensitive lookups across both Title and Description fields
+- **Multi-filter support** — Simultaneously filter by **Category** and **Status**
+
+---
+
+## 🧰 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| **Frontend Framework** | Next.js 14+ (App Router) |
+| **Styling** | Tailwind CSS |
+| **State / Auth Management** | React Context API (`AuthProvider`) |
+| **HTTP Client** | Axios (with request interceptors for auto token attachment) |
+| **Backend Runtime** | Node.js + Express.js |
+| **Database ORM** | Mongoose |
+| **Database** | MongoDB Atlas (`test` database) |
+| **Auth** | JSON Web Tokens (JWT) + bcryptjs |
+
+---
+
+## 📁 Project Structure
+
+```
 globaltna-assessment/
 ├── backend/
-│   ├── config/          # Database connection profiles
-│   ├── controllers/     # Business logic handlers (job & auth controllers)
-│   ├── middleware/      # JWT protection authorization intercepts
-│   ├── models/          # Mongoose Database Schemas (JobRequest.js, User.js)
-│   ├── routes/          # Express route pathway blueprints (jobRoutes.js, authRoutes.js)
-│   ├── package.json
-│   └── server.js        # Express server application entry point
+│   ├── config/          # Database connection setup
+│   ├── controllers/     # Business logic (auth & job controllers)
+│   ├── middleware/       # JWT verification middleware
+│   ├── models/          # Mongoose schemas (User.js, JobRequest.js)
+│   ├── routes/          # Express routes (authRoutes.js, jobRoutes.js)
+│   ├── server.js        # Express app entry point
+│   └── package.json
 ├── frontend/
 │   ├── src/
-│   │   ├── app/         # Next.js App Router (Layouts, Views & Contexts)
-│   │   │   ├── context/ # React Auth Context API engine
-│   │   │   ├── login/   # Login page implementation view
-│   │   │   └── register/# Registration page implementation view
-│   │   └── services/    # Axios instances containing automated Bearer header interceptors
-│   ├── package.json
-│   └── tailwind.config.js
-└── netlify.toml         # Automated deployment and pipeline configuration configurations for Netlify
-
+│   │   ├── app/
+│   │   │   ├── context/    # React Auth Context
+│   │   │   ├── login/      # Login page
+│   │   │   └── register/   # Registration page
+│   │   └── services/       # Axios instance with Bearer token interceptor
+│   ├── tailwind.config.js
+│   └── package.json
+└── netlify.toml             # Netlify deployment configuration
 ```
 
 ---
 
-## ⚙️ Environment Variables Configuration
+## ⚙️ Environment Variables
 
-To spin up this project locally, you must create distinct environment variable configuration files within both target environment roots.
-
-### Backend Environment Setup (`backend/.env`)
-
-Create a `.env` file inside the `backend/` directory:
+### Backend — `backend/.env`
 
 ```env
-hide 
-
+PORT=5000
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/test?appName=<appName>
+JWT_SECRET=your_super_secret_jwt_key_here
 ```
 
-### Frontend Environment Setup (`frontend/.env.local`)
-
-Create a `.env.local` file inside the `frontend/` directory:
+### Frontend — `frontend/.env.local`
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
-
 ```
+
+> ⚠️ Never commit `.env` files to version control. Add them to `.gitignore`.
 
 ---
 
-## 💻 Local Setup & Installation
+## 🚀 Local Setup
 
-Execute the following commands sequentially inside your terminal window to boot the application stacks locally:
-
-### 1. Clone the Codebase
+### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/Diliwije/globaltna-assessment.git](https://github.com/Diliwije/globaltna-assessment.git)
+git clone https://github.com/Diliwije/globaltna-assessment.git
 cd globaltna-assessment
-
 ```
 
-### 2. Boot the Express Server Instance
+### 2. Start the Backend
 
 ```bash
 cd backend
 npm install
 npm start
-
 ```
 
-*The service pipeline will compile and stream on `http://localhost:5000` alongside an active MongoDB cluster connection log.*
+The server will run at **http://localhost:5000** and connect to MongoDB Atlas.
 
-### 3. Launch the Client Application Instance
+### 3. Start the Frontend
 
-Open a completely separate terminal tab or window starting at the codebase root directory:
+Open a **new terminal** from the project root:
 
 ```bash
 cd frontend
 npm install
 npm run dev
-
 ```
 
-*The web platform interface will hot-reload and compile successfully on `http://localhost:3000`.*
+The app will be available at **http://localhost:3000**.
 
 ---
 
-## 🌐 Core API Endpoint Blueprints
+## 📡 API Reference
 
-### Authentication Enclave (`/api/auth`)
+### Auth Endpoints — `/api/auth`
 
-* `POST /api/auth/register` - Create a clean user profile account.
-* `POST /api/auth/login` - Verify user credentials and generate an active JWT.
+| Method | Endpoint | Description | Auth Required |
+|---|---|---|---|
+| `POST` | `/api/auth/register` | Register a new user | ❌ |
+| `POST` | `/api/auth/login` | Login and receive a JWT | ❌ |
 
-### Service Board Requests Enclave (`/api/jobs`)
+### Jobs Endpoints — `/api/jobs`
 
-* `GET /api/jobs` - Public list extraction interface supporting dynamic filtering attributes (`?search=`, `?category=`, `?status=`).
-* `GET /api/jobs/:id` - Public profile fetching for a target resource document.
-* `POST /api/jobs` - Protected write handler creating new records mapped to active users.
-* `PATCH /api/jobs/:id` - Protected updates modifying workflow lifecycle state parameters.
-* `DELETE /api/jobs/:id` - Protected resource destruction triggers.
+| Method | Endpoint | Description | Auth Required |
+|---|---|---|---|
+| `GET` | `/api/jobs` | List all requests (supports `?search=`, `?category=`, `?status=`) | ❌ |
+| `GET` | `/api/jobs/:id` | Get a single request by ID | ❌ |
+| `POST` | `/api/jobs` | Create a new service request | ✅ |
+| `PATCH` | `/api/jobs/:id` | Update request status | ✅ |
+| `DELETE` | `/api/jobs/:id` | Delete a request | ✅ |
 
-```
+---
 
-```
+## 🗄️ Database
+
+This project uses **MongoDB Atlas** with the `test` database. Collections:
+
+- `users` — Stores registered user accounts (hashed passwords)
+- `jobrequests` — Stores all service request documents with user references
+
+---
+
+## 📜 License
+
+This project was built as part of a software engineering assessment for **GlobalTNA**. All rights reserved.
