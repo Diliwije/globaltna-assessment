@@ -1,1 +1,298 @@
 @import "tailwindcss";
+
+/* src/app/globals.css */
+
+
+/* ─── Design Tokens ──────────────────────────────────────────── */
+:root {
+  /* Core Palette */
+  --bg-canvas:      #F5F4F0;       /* warm off-white canvas */
+  --bg-surface:     #FFFFFF;
+  --bg-muted:       #F0EFEB;
+  --bg-subtle:      #FAFAF8;
+
+  /* Borders */
+  --border-light:   #E8E7E2;
+  --border-medium:  #D4D3CC;
+
+  /* Text */
+  --text-primary:   #1A1916;
+  --text-secondary: #5C5B54;
+  --text-muted:     #9C9B93;
+
+  /* Brand Accent — deep ink blue */
+  --accent:         #1B3A5C;
+  --accent-hover:   #142D47;
+  --accent-light:   #EBF1F8;
+  --accent-mid:     #C5D8EE;
+
+  /* Status */
+  --status-open-bg:       #E8F5EE;
+  --status-open-text:     #1A6B3C;
+  --status-open-border:   #B3DFC4;
+
+  --status-progress-bg:   #FEF6E4;
+  --status-progress-text: #8A5A00;
+  --status-progress-border:#F5D98A;
+
+  --status-closed-bg:     #F0EFEB;
+  --status-closed-text:   #5C5B54;
+  --status-closed-border: #D4D3CC;
+
+  /* Category pill */
+  --cat-bg:         #EBF1F8;
+  --cat-text:       #1B3A5C;
+
+  /* Shadows */
+  --shadow-card:    0 1px 3px rgba(26,25,22,0.06), 0 1px 2px rgba(26,25,22,0.04);
+  --shadow-card-hover: 0 6px 20px rgba(26,25,22,0.09), 0 2px 6px rgba(26,25,22,0.05);
+  --shadow-form:    0 2px 8px rgba(26,25,22,0.08), 0 1px 3px rgba(26,25,22,0.05);
+
+  /* Typography */
+  --font-display:  'DM Serif Display', Georgia, serif;
+  --font-body:     'DM Sans', system-ui, sans-serif;
+}
+
+/* ─── Base Reset ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  min-height: 100vh;
+  /* Subtle linen-like texture */
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(27,58,92,0.03) 0%, transparent 60%),
+    radial-gradient(circle at 80% 100%, rgba(27,58,92,0.025) 0%, transparent 60%);
+}
+
+/* ─── Typography ─────────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* ─── Global Component Styles ────────────────────────────────── */
+
+/* Surface card */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* ─── Inputs ─────────────────────────────────────────────────── */
+.input-base {
+  width: 100%;
+  background: var(--bg-subtle);
+  border: 1.5px solid var(--border-light);
+  border-radius: 8px;
+  padding: 0.55rem 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  outline: none;
+}
+
+.input-base::placeholder {
+  color: var(--text-muted);
+}
+
+.input-base:focus {
+  border-color: var(--accent);
+  background: var(--bg-surface);
+  box-shadow: 0 0 0 3px rgba(27,58,92,0.08);
+}
+
+/* ─── Buttons ────────────────────────────────────────────────── */
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.01em;
+  border-radius: 8px;
+  padding: 0.6rem 1.25rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease;
+  box-shadow: 0 1px 3px rgba(27,58,92,0.25);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 3px 10px rgba(27,58,92,0.3);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  background: #8BAEC9;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--border-medium);
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--bg-muted);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn-danger {
+  background: #FEF2F2;
+  color: #C0392B;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.875rem;
+  border-radius: 7px;
+  padding: 0.5rem 1rem;
+  border: 1.5px solid #FAD7D4;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.btn-danger:hover {
+  background: #FDECEC;
+  border-color: #E57370;
+  box-shadow: 0 2px 8px rgba(192,57,43,0.12);
+}
+
+/* ─── Status & Category Pills ────────────────────────────────── */
+.pill-category {
+  background: var(--cat-bg);
+  color: var(--cat-text);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+  border: 1px solid var(--accent-mid);
+}
+
+.pill-open {
+  background: var(--status-open-bg);
+  color: var(--status-open-text);
+  border: 1px solid var(--status-open-border);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+}
+
+.pill-progress {
+  background: var(--status-progress-bg);
+  color: var(--status-progress-text);
+  border: 1px solid var(--status-progress-border);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+}
+
+.pill-closed {
+  background: var(--status-closed-bg);
+  color: var(--status-closed-text);
+  border: 1px solid var(--status-closed-border);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.7rem;
+  border-radius: 100px;
+}
+
+/* ─── Select override ────────────────────────────────────────── */
+select.input-base {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235C5B54' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  padding-right: 2.25rem;
+  cursor: pointer;
+}
+
+/* ─── Page-entry animation ───────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.4s ease forwards;
+}
+
+.stagger-1 { animation-delay: 0.05s; opacity: 0; }
+.stagger-2 { animation-delay: 0.12s; opacity: 0; }
+.stagger-3 { animation-delay: 0.19s; opacity: 0; }
+
+/* ─── Divider ────────────────────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-light);
+}
+
+/* ─── Link ───────────────────────────────────────────────────── */
+.link-accent {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.link-accent:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.link-back {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.875rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.15s;
+}
+
+.link-back:hover {
+  color: var(--accent);
+}
