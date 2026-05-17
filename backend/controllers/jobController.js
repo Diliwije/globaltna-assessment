@@ -1,15 +1,23 @@
 // controllers/jobController.js
 const JobRequest = require('../models/JobRequest');
 
-// Fetch all job requests with optional filtering
+// Fetch all job requests with optional filtering and searching
 exports.getJobs = async (req, res, next) => {
   try {
-    const { category, status } = req.query;
+    const { category, status, search } = req.query;
     const filter = {};
     
     // Apply filters if they exist in the query parameters
     if (category) filter.category = category;
     if (status) filter.status = status;
+
+    // Apply search across title and description (case-insensitive)
+    if (search) {
+      filter.$or = [
+        { title: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } }
+      ];
+    }
 
     // Fetch jobs and sort by newest first
     const jobs = await JobRequest.find(filter).sort({ createdAt: -1 });
