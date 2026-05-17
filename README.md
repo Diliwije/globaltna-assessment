@@ -134,6 +134,7 @@ npm run dev
 
 * Built utilizing the `@netlify/plugin-nextjs` pipeline specification defined within the root `netlify.toml` layout matrix.
 * `NEXT_PUBLIC_API_URL` environment variables set up pointing towards the containerized Express routing endpoint.
+* URL:https://startling-kitsune-123.netlify.app/
 
 ```
 
