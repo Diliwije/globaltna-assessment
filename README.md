@@ -1,8 +1,4 @@
-අයියෝ එහෙමද? ඒකට හේතුව වෙන්න ඇත්තේ ඔයා ඒක සාමාන්‍ය Text Editor එකකින් (Notepad වගේ) බලපු නිසා වෙන්න ඇති.
 
-Markdown (`.md`) file එකක් සාමාන්‍ය විදිහට open කළාම `#`, ``, `-` වගේ සංකේත විතරක් තියෙන ප්ලේන් text එකක් විදිහට තමයි පේන්නේ. හැබැයි මේ code එක **`README.md`** කියන නමින්ම ප්‍රධාන folder එක ඇතුළේ සේව් කරලා **GitHub එකට push කරපු සැනින්**, GitHub එකෙන් මේ සංකේත ඔක්කොම අඳුරගෙන ඉතාමත් වෘත්තීය මට්ටමේ ලස්සන UI එකකට මේක auto-render කරනවා.
-
-ඔයාට ලේසි වෙන්න මම මෙතන **Raw Markdown Code** එකක් විදිහට දෙන්නම්. ඔයා මේ කොටුවේ දකුණු පැත්තේ උඩ තියෙන **"Copy"** button එක click කරලා සම්පූර්ණයෙන්ම copy කරගෙන ඔයාගේ `README.md` file එක ඇතුළට paste කරන්න:
 
 ```markdown
 # Service Request Board
@@ -140,7 +136,5 @@ npm run dev
 * `NEXT_PUBLIC_API_URL` environment variables set up pointing towards the containerized Express routing endpoint.
 
 ```
-
-මේක දාලා GitHub එකට push කරලා ඔයාගේ GitHub repository එකේ ප්‍රධාන පිටුව (Main page) check කරලා බලන්න, එතකොට මේක සුපිරියටම ලස්සනට පෙනෙයි!
 
 ```
