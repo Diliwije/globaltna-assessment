@@ -88,9 +88,7 @@ To spin up this project locally, you must create distinct environment variable c
 Create a `.env` file inside the `backend/` directory:
 
 ```env
-PORT=5000
-MONGO_URI=mongodb+srv://dilshanwijerathna426_db_user:d7cZp9k4VPPAucUa@pos-devops.4z0ljwd.mongodb.net/test?appName=pos-devops
-JWT_SECRET=your_super_secret_jwt_key_here
+hide 
 
 ```
 
